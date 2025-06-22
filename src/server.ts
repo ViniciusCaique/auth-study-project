@@ -1,5 +1,6 @@
 import { fastify } from 'fastify';
 import { fastifyCors } from '@fastify/cors';
+import { fastifyJwt } from '@fastify/jwt';
 import {
 	jsonSchemaTransform,
 	serializerCompiler,
@@ -12,7 +13,9 @@ import z, { ZodError } from 'zod/v4';
 // import { userRoutes } from './controllers/users/routes';
 import { fastifySwagger } from '@fastify/swagger';
 import { fastifySwaggerUi } from '@fastify/swagger-ui';
-import { authRoutes } from './controllers/auth/routes';
+import { authRoutes } from './controllers/auth/_routes';
+import { env } from './env';
+// import { JwtService } from './services/jwt-service';
 
 const app = fastify().withTypeProvider<ZodTypeProvider>();
 
@@ -22,6 +25,15 @@ app.setSerializerCompiler(serializerCompiler);
 app.register(fastifyCors, {
 	origin: '*',
 });
+
+app.register(fastifyJwt, {
+	secret: env.JWT_SECRET,
+	sign: {
+		expiresIn: '1h',
+	},
+});
+
+// new JwtService(app);
 
 app.register(fastifySwagger, {
 	openapi: {

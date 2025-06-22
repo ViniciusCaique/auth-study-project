@@ -1,4 +1,4 @@
-import type { User, UserCreateInput } from 'src/schemas/users';
+import type { User, UserCreateInput } from 'src/schemas/users/schema';
 import type { ITransaction } from './transaction-repository';
 
 export interface UsersRepository {

@@ -1,10 +1,10 @@
 import bcrypt from 'bcryptjs';
 import type { UsersRepository } from 'src/repositories/users-repository';
-import type { userCreateBodyType } from 'src/schemas/users';
+import type { signUpBodyType } from 'src/schemas/users/auth';
 import { UserAlreadyExistsError } from '../_errors/UserAlreadyExistsError';
 
 interface CreateUserServiceRequest {
-	data: userCreateBodyType;
+	data: signUpBodyType;
 }
 
 // interface CreateUserServiceResponse {

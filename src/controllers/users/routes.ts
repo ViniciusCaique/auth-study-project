@@ -1,5 +1,5 @@
 import { createUser } from '../auth/create-user';
-import { userCreateBody } from 'src/schemas/users';
+import { userCreateBody } from 'src/schemas/users/auth';
 import type { FastifyTypedInstance } from 'src/schemas/fastify-instance';
 import z from 'zod/v4';
 

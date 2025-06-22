@@ -1,4 +1,4 @@
-import type { User, UserCreateInput } from 'src/schemas/users';
+import type { User, UserCreateInput } from 'src/schemas/users/schema';
 import type { UsersRepository } from '../users-repository';
 import { db, type Transaction } from 'src/db';
 import { users } from 'src/db/schema/users';
