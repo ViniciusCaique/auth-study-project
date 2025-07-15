@@ -1,22 +1,24 @@
+import type { getUserParams } from '@/schemas/users/schema';
+import { makeGetUserService } from '@/services/users/_factories/make-create-user-service';
 import type { FastifyReply, FastifyRequest } from 'fastify';
-import type { signUpBodyType } from 'src/schemas/users/auth';
-import { UserAlreadyExistsError } from 'src/services/_errors/UserAlreadyExistsError';
-import { makeCreateUserService } from 'src/services/auth/_factories/make-create-user-service';
 
-export async function createUser(
+import { UserAlreadyExistsError } from 'src/services/_errors/UserAlreadyExistsError';
+
+export async function getUser(
 	request: FastifyRequest<{
-		Body: signUpBodyType;
+		Params: getUserParams;
 	}>,
 	reply: FastifyReply,
 ) {
 	try {
-		const data = request.body;
+		const user = request.params;
 
-		const service = makeCreateUserService();
-		const response = await service.execute({ data });
+		const service = makeGetUserService();
+
+		const response = await service.execute({ userId: user.userId });
 
 		return reply.status(201).send({
-			message: 'User created successfully',
+			message: 'User',
 			data: response,
 		});
 	} catch (err) {
