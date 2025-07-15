@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
-import type { UsersRepository } from 'src/repositories/users-repository';
-import type { signInBodyType } from 'src/schemas/users/auth';
+import type { UsersRepository } from '@/repositories/users-repository';
+import type { signInBodyType } from '@/schemas/users/auth';
 import { InvalidCredentialsError } from '../_errors/InvalidCredentialsError';
 
 interface SignInServiceRequest {

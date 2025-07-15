@@ -15,6 +15,7 @@ import { fastifySwagger } from '@fastify/swagger';
 import { fastifySwaggerUi } from '@fastify/swagger-ui';
 import { authRoutes } from './controllers/auth/_routes';
 import { env } from './env';
+import { userRoutes } from './controllers/users/_routes';
 // import { JwtService } from './services/jwt-service';
 
 const app = fastify().withTypeProvider<ZodTypeProvider>();
@@ -63,6 +64,10 @@ app.register(import('@scalar/fastify-api-reference'), {
 
 app.register(authRoutes, {
 	prefix: '/api/auth',
+});
+
+app.register(userRoutes, {
+	prefix: '/api/users',
 });
 
 app.setErrorHandler((error, _, reply) => {

@@ -1,4 +1,8 @@
-import type { User, UserCreateInput } from 'src/schemas/users/schema';
+import type {
+	User,
+	UserCreateInput,
+	UserPreview,
+} from 'src/schemas/users/schema';
 import type { UsersRepository } from '../users-repository';
 import { db, type Transaction } from 'src/db';
 import { users } from 'src/db/schema/users';
@@ -36,6 +40,21 @@ export class DrizzleUsersRepository implements UsersRepository {
 
 		const [user] = await dbInstance
 			.select()
+			.from(users)
+			.where(eq(users.id, id));
+
+		return user;
+	}
+
+	async findById1(id: string, tx?: Transaction): Promise<UserPreview | null> {
+		const dbInstance = tx ?? db;
+
+		const [user] = await dbInstance
+			.select({
+				name: users.name,
+				email: users.email,
+				username: users.username,
+			})
 			.from(users)
 			.where(eq(users.id, id));
 
